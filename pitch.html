@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marshmallow Challenge - ASTRYX</title>
+
+<style>
+/* =========================
+   BASE
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(circle at top, #0a0a0a, #000);
+    color: #eaeaea;
+    overflow-x: hidden;
+}
+
+/* =========================
+   MATRIX BACKGROUND (FIXED)
+========================= */
+.matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    opacity: 0.08; /* toned down for readability */
+    pointer-events: none;
+}
+
+/* overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center,
+        rgba(123,104,238,0.15),
+        rgba(0,0,0,0.95) 70%);
+    z-index: -2;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(10,10,20,0.7);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(123,104,238,0.2);
+}
+
+/* LOGO FIXED */
+.logo img {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #7b68ee;
+    box-shadow: 0 0 15px rgba(123,104,238,0.6);
+    transition: 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #7b68ee;
+}
+
+/* MENU LIST */
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* ✔ mas hipid nga spacing */
+    list-style: none;
+}
+
+/* LINKS */
+nav ul li a {
+    text-decoration: none;
+    color: #ccc;
+    padding: 10px 12px;
+    display: block;
+    transition: 0.3s;
+    border-radius: 6px;
+}
+
+nav ul li a:hover {
+    color: violet;
+    background: rgba(138,43,226,0.15);
+}
+
+/* DROPDOWN FIX */
+.dropdown {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: rgba(25, 10, 40, 0.98);
+    padding: 10px;
+    border-radius: 12px;
+    width: 260px;          /* fixed width */
+    max-height: 320px;     /* ✔ limit height */
+    overflow-y: auto;      /* ✔ scroll when too long */
+    border: 1px solid violet;
+    box-shadow: 0 0 20px rgba(138,43,226,0.5);
+    z-index: 9999;
+}
+
+/* show state */
+.dropdown.active .submenu {
+    display: block;
+}
+
+/* nicer spacing */
+.submenu li a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: #ddd;
+    white-space: nowrap;
+}
+
+.submenu li a:hover {
+    background: violet;
+    color: white;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 70px 20px;
+    background: linear-gradient(135deg, rgba(46,26,71,0.6), rgba(26,26,46,0.6));
+}
+
+header h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px #7b68ee,
+        0 0 20px #7b68ee,
+        0 0 40px #6a00ff,
+        0 0 80px #6a00ff;
+    animation: floatTitle 3s ease-in-out infinite;
+}
+
+@keyframes floatTitle {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* MAIN */
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+/* SECTIONS */
+section {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(14px);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(123,104,238,0.18);
+
+    opacity: 0;
+    transform: translateY(25px);
+    transition: 0.6s ease;
+}
+
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    color: #7b68ee;
+    margin-bottom: 10px;
+}
+
+p, li {
+    color: #c8c8c8;
+    line-height: 1.7;
+}
+
+/* LIST FIX */
+section ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+/* GALLERY */
+.gallery1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 15px;
+}
+
+.gallery1 img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: 0.3s;
+}
+
+.gallery1 img:hover {
+    transform: scale(1.05);
+}
+
+/* FOOTER FIX */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #aaa;
+    border-top: 1px solid rgba(123,104,238,0.2);
+    background: rgba(0,0,0,0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .gallery1 img {
+        height: 140px;
+    }
+}
+
+/* --- Team Members Layout --- */
+/* Ginapakita ang 2x2 nga layout sa desktop */
+main section ul {
+    display: flex;
+    flex-wrap: wrap;               /* Mag-wrap para mahimo 2 rows */
+    justify-content: center;       /* Center horizontally */
+    gap: 30px;                     /* Space between cards */
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+/* Individual Team Member Cards */
+/* Style sang kada member card */
+main section ul li {
+    background: #000;
+    border: 1px solid #e1bee7;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(106, 90, 205, 0.05);
+    flex: 0 0 calc(50% - 30px);   /* 2 cards per row, gap considered */
+}
+main section ul li:hover {
+    transform: translateY(-10px);
+    border-color: #9370db;
+    box-shadow: 0 10px 20px rgba(147, 112, 219, 0.15);
+}
+
+/* Team Member Images */
+/* Ginahimo nga circular ang mga litrato */
+main section ul li img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #f3e5f5;
+    transition: border-color 0.3s;
+}
+
+main section ul li:hover img {
+    border-color: #9370db;
+}
+
+/* Typography for Names and Roles */
+/* Pangalan kag role sang kada member */
+main section ul li h3 {
+    font-size: 1.1rem;
+    color: #4b0082;
+    margin-bottom: 10px;
+}
+
+main section ul li p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">
+        <img src="logo.jpg" alt="Logo">
+    </div>
+
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+
+        <li class="dropdown">
+            <a href="#">Activities ▼</a>
+            <ul class="submenu">
+                <li><a href="brainstorming.html">Brainstorming</a></li>
+                <li><a href="marshmallow.html">Marshmallow</a></li>
+                <li><a href="pitch.html">Elevator Pitch</a></li>
+                <li><a href="presentation.html">Website Presentation</a></li>
+                <li><a href="jeoparody.html">Jeoparody</a></li>
+                <li><a href="literature review.html">Literature Review</a></li>
+                <li><a href="persona mapping.html">Persona Mapping</a></li>
+                <li><a href="storyboard.html">Storyboard</a></li>
+                <li><a href="prototype.html">Prototype</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+<!-- HERO -->
+<section class="hero">
+    <img src="group.jpg" alt="Teamwork Image" style="width:100%;height:600px;object-fit:cover;filter:brightness(60%);">
+</section>
+
+<!-- HEADER -->
+<header>
+    <h1>Elevator Pitch</h1>
+</header>
+
+<!-- CONTENT -->
+<main>
+
+<section>
+    <h2>Overview</h2>
+    <p>
+                 An Elevator Pitch is a short and persuasive speech used to spark interest 
+                in an idea, product, or project.
+            </p>
+
+            <h2>Objective</h2>
+            <p>
+               Improve communication skills and the ability to present ideas clearly and confidently.
+            </p>
+
+           <h2>How It Works</h2>
+            <ul>
+                <li>Participants prepare a 2 minutes  pitch.</li>
+                
+                <li>Feedback is given to improve delivery and clarity.</li>
+            </ul>
+
+    <div class="gallery1">
+        <img src="a.jpg">
+        <img src="b.jpg">
+        <img src="c.jpg">
+    </div>
+
+   
+</section>
+
+<!-- REFLECTIONS SECTION -->
+<section class="reflections1">
+    <h2>Reflection</h2>
+     <p>During our elevator pitch activity, our group experienced both excitement and nervousness. One moment that stood out was when Kenneth felt afraid to present. Despite his fear, Kenneth still tried his best to deliver his part. This showed courage and willingness to step out of his comfort zone. As a team, we realized the importance of supporting one another, especially during challenging moments. It helped us build trust and strengthened our teamwork. In the end, the experience taught us that confidence grows with practice and support.</p>
+</section>
+
+</main>
+
+<footer>
+    © 2026 ASTRYX Team
+</footer>
+
+<!-- JS FIX -->
+<script>
+/* dropdown fix */
+    const dropdown = document.querySelector(".dropdown");
+const trigger = dropdown.querySelector("a");
+
+trigger.addEventListener("click", function (e) {
+    e.preventDefault(); // stop link jump
+    dropdown.classList.toggle("active"); // open/close toggle
+});
+
+// optional: click outside to close
+document.addEventListener("click", function (e) {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("active");
+    }
+});
+
+/* scroll animation */
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+}, { threshold: 0.15 });
+
+sections.forEach(sec => observer.observe(sec));
+
+/* matrix background optimized */
+const canvas = document.createElement("canvas");
+canvas.classList.add("matrixCanvas");
+document.body.prepend(canvas);
+
+const ctx = canvas.getContext("2d");
+
+let fontSize = 16;
+let columns;
+let drops = [];
+const letters = "01ASTRYX@#$%&";
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    columns = Math.floor(canvas.width / fontSize);
+    drops = Array(columns).fill(1);
+}
+
+resize();
+window.addEventListener("resize", resize);
+
+function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.06)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        const char = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillStyle = "#7b68ee";
+
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 45);
+</script>
+
+</body>
+</html>
