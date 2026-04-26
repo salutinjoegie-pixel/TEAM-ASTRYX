@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Team Building Hub</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: black;
+    color: #eaeaea;
+    overflow-x: hidden;
+}
+
+/* MATRIX */
+.matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -3;
+    opacity: 0.3;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(123,104,238,0.15), black 70%);
+    z-index: -2;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(10,10,20,0.7);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(123,104,238,0.2);
+}
+
+/* LOGO FIXED */
+.logo img {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #7b68ee;
+    box-shadow: 0 0 15px rgba(123,104,238,0.6);
+    transition: 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #7b68ee;
+}
+
+/* MENU LIST */
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* ✔ mas hipid nga spacing */
+    list-style: none;
+}
+
+/* LINKS */
+nav ul li a {
+    text-decoration: none;
+    color: #ccc;
+    padding: 10px 12px;
+    display: block;
+    transition: 0.3s;
+    border-radius: 6px;
+}
+
+nav ul li a:hover {
+    color: violet;
+    background: rgba(138,43,226,0.15);
+}
+
+/* DROPDOWN FIX */
+.dropdown {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: rgba(25, 10, 40, 0.98);
+    padding: 10px;
+    border-radius: 12px;
+    width: 260px;          /* fixed width */
+    max-height: 320px;     /* ✔ limit height */
+    overflow-y: auto;      /* ✔ scroll when too long */
+    border: 1px solid violet;
+    box-shadow: 0 0 20px rgba(138,43,226,0.5);
+    z-index: 9999;
+}
+
+/* show state */
+.dropdown.active .submenu {
+    display: block;
+}
+
+/* nicer spacing */
+.submenu li a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: #ddd;
+    white-space: nowrap;
+}
+
+.submenu li a:hover {
+    background: violet;
+    color: white;
+}
+
+/* HERO */
+.hero img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    filter: brightness(60%) contrast(120%);
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 70px 20px;
+    background: linear-gradient(135deg, rgba(46,26,71,0.6), rgba(26,26,46,0.6));
+}
+header h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px #7b68ee,
+        0 0 20px #7b68ee,
+        0 0 40px #6a00ff,
+        0 0 80px #6a00ff;
+    animation: floatTitle 3s ease-in-out infinite;
+}
+
+@keyframes floatTitle {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+    
+
+/* MAIN */
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* SECTIONS */
+section {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(123,104,238,0.2);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+}
+
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    color: #7b68ee;
+    margin-bottom: 10px;
+}
+
+/* TEAM */
+ul {
+    list-style: none;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+li img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #7b68ee;
+    box-shadow: 0 0 15px rgba(123,104,238,0.4);
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #b39ddb;
+}
+
+/* FOOTER */
+footer {
+    background: rgba(10,10,10,0.8);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(123,104,238,0.2);
+}
+
+footer a {
+    color: #ccc;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+footer a:hover {
+    color: #7b68ee;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .hero img {
+        height: 300px;
+    }
+}
+/* =========================
+   3D BUTTON STYLE
+========================= */
+.btn-3d {
+    display: inline-block;      /* IMPORTANT: fits content width */
+    padding: 12px 24px;
+    margin: 20px auto;
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+
+    background: linear-gradient(145deg, #7b68ee, #5a4fcf);
+    border-radius: 12px;
+
+    /* 3D depth */
+    box-shadow:
+        0 6px 0 #4b3fb5,
+        0 10px 20px rgba(0,0,0,0.5);
+
+    transition: all 0.15s ease;
+}
+
+/* CENTER FIX */
+.btn-3d-wrapper {
+    text-align: center;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">
+        <img src="logo.jpg" alt="ASTRYX Logo">
+    </div>
+
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+
+        <li class="dropdown">
+            <a href="#">Activities ▼</a>
+            <ul class="submenu">
+                <li><a href="brainstorming.html">Brainstorming</a></li>
+                <li><a href="marshmallow.html">Marshmallow</a></li>
+                <li><a href="pitch.html">Elevator Pitch</a></li>
+                <li><a href="presentation.html">Website Presentation</a></li>
+                <li><a href="jeoparody.html">Jeoparody</a></li>
+                <li><a href="literature review.html">Literature Review</a></li>
+                <li><a href="persona mapping.html">Persona Mapping</a></li>
+                <li><a href="storyboard.html">Storyboard</a></li>
+                <li><a href="prototype.html">Prototype</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <img src="group.jpg" alt="Teamwork Image">
+</section>
+
+<!-- HEADER -->
+<header>
+    <h1>Meet Team Astryx</h1>
+    <p>We're a group of passionate individuals dedicated to helping teams succeed.</p>
+</header>
+
+<div class="btn-3d-wrapper">
+    <a href="activities.html" class="btn-3d">Go to activities</a>
+</div>
+
+<!-- MAIN -->
+<main>
+
+    <section>
+        <h2>Our Story</h2>
+        <p>Team Astryx began with a simple idea: to bring people together and unlock the power of teamwork. Our mission is to inspire collaboration, spark creativity, and help individuals grow while having fun. With four unique members, each bringing their own skills and perspectives, we strive to create meaningful experiences that challenge, engage, and motivate every team we work with. Together, we believe that any goal can be achieved when minds connect and ideas are shared.</p>
+    </section>
+
+    <section>
+        <h2>Meet the Team</h2>
+        <ul>
+            <li>
+                <img src="71.png">
+                <h3>Hacker - Joegie Salutin</h3>
+                <p>Joegie is the team’s tech wizard. Hacking and coding can be really tough, full of tricky problems and stubborn bugs, but he never gives up. He spends hours figuring out solutions, learning new tricks, and making sure everything works. Even when it’s difficult, Joegie tries his absolute best, and somehow, by the end, he always makes it happen.</p>
+            </li>
+
+            <li>
+                <img src="3.jpg">
+                <h3>Hipster - Lynbel Grace Peñora</h3>
+                <p>Maya is our creative director, bringing a fresh perspective to our team building activities. She's a design enthusiast with a love for storytelling and visual arts.</p>
+            </li>
+
+            <li>
+                <img src="1.jpg">
+                <h3>Hustler - Kenneth Palmes</h3>
+                <p>Jack is our marketing guru, responsible for spreading the word about our team building activities. He's a sales expert with a passion for networking and building relationships.</p>
+            </li>
+
+            <li>
+                <img src="2.jpg">
+                <h3>Handler - Charmae Quibingco</h3>
+                <p>The boss behind the scenes. Charmae keeps everyone organized and makes sure deadlines are not just "suggestions." Calm, focused, and always in control. If the team is chaos, she is the order. Basically, the real MVP</p>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+         <h2>Story Behind Our Logo</h2>
+        <img src="logo.jpg" style="width:200px; display:block; margin:20px auto;">
+        <p>The ASTRYX logo represents our vision of limitless potential and innovation. Inspired by the word “astral” and the concept of stars, the logo symbolizes ambition, creativity, and connection. The glowing lines and nodes in the design reflect how our ideas and teamwork are interconnected, showing that every member plays a crucial role in reaching higher goals. Just like stars in the sky, ASTRYX aims to shine brightly and inspire others to reach beyond limits.</p>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 ASTRYX Team</p>
+
+    <div>
+        <a href="mailto:yourgmail@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com"><i class="fab fa-facebook"></i></a>
+    </div>
+</footer>
+
+<script>
+
+const dropdown = document.querySelector(".dropdown");
+const trigger = dropdown.querySelector("a");
+
+trigger.addEventListener("click", function (e) {
+    e.preventDefault(); // stop link jump
+    dropdown.classList.toggle("active"); // open/close toggle
+});
+
+// optional: click outside to close
+document.addEventListener("click", function (e) {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("active");
+    }
+});
+
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top < window.innerHeight - 100) {
+            sec.classList.add("show");
+        }
+    });
+});
+
+window.onload = () => {
+    sections.forEach((sec, i) => {
+        setTimeout(() => sec.classList.add("show"), i * 200);
+    });
+
+    /* MATRIX */
+    const canvas = document.createElement("canvas");
+    canvas.classList.add("matrixCanvas");
+    document.body.prepend(canvas);
+
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const letters = "01ASTRYX".split("");
+    const fontSize = 14;
+    const drops = Array(200).fill(1);
+
+    function draw() {
+        ctx.fillStyle = "rgba(0,0,0,0.08)";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        ctx.fillStyle = "#7b68ee";
+        ctx.font = fontSize + "px monospace";
+
+        drops.forEach((y,i)=>{
+            const text = letters[Math.floor(Math.random()*letters.length)];
+            ctx.fillText(text, i*fontSize, y);
+            drops[i] = y > canvas.height ? 0 : y + fontSize;
+        });
+    }
+
+    setInterval(draw, 33);
+};
+</script>
+
+</body>
+</html>
