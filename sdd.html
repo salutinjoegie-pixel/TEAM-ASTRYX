@@ -267,7 +267,7 @@ footer a:hover {
 .btn-3d {
     display: inline-block;
     padding: 12px 24px;
-    margin: 20px auto;
+    margin: 20px 10px;
     font-size: 15px;
     color: #fff;
     text-decoration: none;
@@ -441,6 +441,37 @@ button {
     cursor: pointer;
 }
 
+/* =========================
+   IEEE TEXT SECTION
+========================= */
+.ieee-section {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 35px 40px;
+    background: rgba(24,24,24,0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    border: 1px solid rgba(123,104,238,0.2);
+}
+
+.ieee-section h2 {
+    color: #7b68ee;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.ieee-section p {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    font-size: 0.97rem;
+}
+
+.ieee-section p:last-child {
+    margin-bottom: 0;
+}
+
 </style>
 </head>
 
@@ -459,16 +490,11 @@ button {
         <li class="dropdown">
             <a href="#">Activities ▼</a>
             <ul class="submenu">
-                <li><a href="brainstorming.html">Brainstorming</a></li>
-                <li><a href="marshmallow.html">Marshmallow</a></li>
-                <li><a href="pitch.html">Elevator Pitch</a></li>
-                <li><a href="presentation.html">Website Presentation</a></li>
-                <li><a href="jeoparody.html">Jeoparody</a></li>
-                <li><a href="literature review.html">Literature Review</a></li>
-                <li><a href="persona mapping.html">Persona Mapping</a></li>
-                <li><a href="storyboard.html">Storyboard</a></li>
-                <li><a href="prototype.html">Prototype</a></li>
                 <li><a href="sdd.html">IEEE documentation</a></li>
+                <li><a href="sdd1.html">SDD</a></li>
+                <li><a href="spmp.html">SPMP</a></li>
+                <li><a href="std.html">STD</a></li>
+                <li><a href="srs.html">SRS</a></li>
             </ul>
         </li>
     </ul>
@@ -482,49 +508,41 @@ button {
 <!-- HEADER -->
 <header>
     <h1>IEEE DOCUMENTATION</h1>
-    <p class="motto">click the pdf</p>
+    <p class="motto"></p>
 </header>
 
+<!-- BUTTONS -->
 <div class="btn-3d-wrapper">
     <a href="index.html" class="btn-3d">Go to Home</a>
+    <a href="sdd1.html" class="btn-3d">Go to SDD</a>
 </div>
 
-<!-- PDF -->
-<div class="doc-list">
-    <div class="pdf-card" onclick="openDoc('SDD.pdf')">
-        <i class="fas fa-file-pdf"></i>
-        <h3>SDD</h3>
-        <p>By: Joegie Salutin</p>
-    </div>
+<!-- IEEE TEXT SECTION -->
+<div class="ieee-section">
+    <h2>What is IEEE Documentation?</h2>
+    <p>
+        IEEE (Institute of Electrical and Electronics Engineers) documentation refers to a set of standardized
+        technical documents used in software engineering to guide the planning, design, development, and testing
+        of a software system. These documents ensure that all members of a development team are aligned with
+        the project's goals, structure, and requirements.
+    </p>
+    <p>
+        IEEE documentation follows internationally recognized standards that promote clarity, consistency, and
+        professionalism in software projects. Each document serves a specific purpose  from defining what the
+        software must do, to how it is designed, tested, and managed throughout the project lifecycle.
+    </p>
+    <p>
+        As part of this project, our team produced four key IEEE documents: the <strong style="color:#c77dff;">Software Requirements Specification (SRS)</strong>,
+        which outlines the functional and non-functional requirements of the system; the <strong style="color:#c77dff;">Software Design Document (SDD)</strong>,
+        which details the system's architecture and design decisions; the <strong style="color:#c77dff;">Software Test Document (STD)</strong>,
+        which describes the testing strategies and test cases used to validate the software and the
+        <strong style="color:#c77dff;">Software Project Management Plan (SPMP)</strong>, which covers the project schedule, team roles, and resource planning.
+    </p>
+    <p>
+        Together, these documents form a comprehensive blueprint of our software project  reflecting our team's
+        commitment to structured, professional, and standards based software development.
+    </p>
 </div>
-
-    <!-- PDF -->
-<div class="doc-list">
-    <div class="pdf-card" onclick="openDoc('SPMP.pdf')">
-        <i class="fas fa-file-pdf"></i>
-        <h3>SPMP</h3>
-        <p>By: Lynbel Grace Penora</p>
-    </div>
-</div>
-    
-<!-- PDF -->
-<div class="doc-list">
-    <div class="pdf-card" onclick="openDoc('STD.pdf')">
-        <i class="fas fa-file-pdf"></i>
-        <h3>STD</h3>
-        <p>By: Charmai May Quibingco</p>
-    </div>
-</div>
-
-<!-- PDF -->
-<div class="doc-list">
-    <div class="pdf-card" onclick="openDoc('SRS.pdf')">
-        <i class="fas fa-file-pdf"></i>
-        <h3>SRS</h3>
-        <p>By: Kenneth Palmes</p>
-    </div>
-</div>
-
 
 <!-- MODAL (ONLY ONE!) -->
 <div class="modal" id="docModal">
