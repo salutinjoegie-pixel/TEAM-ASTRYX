@@ -53,7 +53,6 @@ nav {
     border-bottom: 1px solid rgba(123,104,238,0.2);
 }
 
-/* LOGO FIXED */
 .logo img {
     height: 55px;
     width: 55px;
@@ -69,15 +68,13 @@ nav {
     box-shadow: 0 0 25px #7b68ee;
 }
 
-/* MENU LIST */
 nav ul {
     display: flex;
     align-items: center;
-    gap: 30px; /* ✔ mas hipid nga spacing */
+    gap: 30px;
     list-style: none;
 }
 
-/* LINKS */
 nav ul li a {
     text-decoration: none;
     color: #ccc;
@@ -92,7 +89,6 @@ nav ul li a:hover {
     background: rgba(138,43,226,0.15);
 }
 
-/* DROPDOWN FIX */
 .dropdown {
     position: relative;
 }
@@ -105,20 +101,18 @@ nav ul li a:hover {
     background: rgba(25, 10, 40, 0.98);
     padding: 10px;
     border-radius: 12px;
-    width: 260px;          /* fixed width */
-    max-height: 320px;     /* ✔ limit height */
-    overflow-y: auto;      /* ✔ scroll when too long */
+    width: 260px;
+    max-height: 320px;
+    overflow-y: auto;
     border: 1px solid violet;
     box-shadow: 0 0 20px rgba(138,43,226,0.5);
     z-index: 9999;
 }
 
-/* show state */
 .dropdown.active .submenu {
     display: block;
 }
 
-/* nicer spacing */
 .submenu li a {
     display: block;
     padding: 8px 10px;
@@ -146,6 +140,7 @@ header {
     padding: 70px 20px;
     background: linear-gradient(135deg, rgba(46,26,71,0.6), rgba(26,26,46,0.6));
 }
+
 header h1 {
     font-size: 3.5rem;
     color: #fff;
@@ -163,7 +158,6 @@ header h1 {
     0%,100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
 }
-    
 
 /* MAIN */
 main {
@@ -192,30 +186,64 @@ section.show {
 
 h2 {
     color: #7b68ee;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 
-/* TEAM */
-ul {
-    list-style: none;
+/* ===== TEAM CARDS GRID ===== */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 10px;
 }
 
-li {
-    margin-bottom: 20px;
+.team-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(123,104,238,0.3);
+    border-radius: 18px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
 }
 
-li img {
-    width: 120px;
-    height: 120px;
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px rgba(123,104,238,0.5);
+}
+
+/* BIGGER PHOTO */
+.team-card img {
+    width: 100%;
+    height: 240px;
     object-fit: cover;
-    border-radius: 15px;
-    border: 2px solid #7b68ee;
-    box-shadow: 0 0 15px rgba(123,104,238,0.4);
-    margin-bottom: 10px;
+    object-position: top;
+    border-bottom: 2px solid rgba(123,104,238,0.4);
+    display: block;
 }
 
-h3 {
+.team-card-body {
+    padding: 18px 16px;
+}
+
+.team-card h3 {
     color: #b39ddb;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.team-card p {
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* LOGO STORY SECTION */
+.logo-story img {
+    width: 200px;
+    display: block;
+    margin: 20px auto;
 }
 
 /* FOOTER */
@@ -236,6 +264,27 @@ footer a:hover {
     color: #7b68ee;
 }
 
+/* 3D BUTTON */
+.btn-3d {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 20px auto;
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background: linear-gradient(145deg, #7b68ee, #5a4fcf);
+    border-radius: 12px;
+    box-shadow:
+        0 6px 0 #4b3fb5,
+        0 10px 20px rgba(0,0,0,0.5);
+    transition: all 0.15s ease;
+}
+
+.btn-3d-wrapper {
+    text-align: center;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     nav {
@@ -250,36 +299,17 @@ footer a:hover {
     .hero img {
         height: 300px;
     }
-}
-/* =========================
-   3D BUTTON STYLE
-========================= */
-.btn-3d {
-    display: inline-block;      /* IMPORTANT: fits content width */
-    padding: 12px 24px;
-    margin: 20px auto;
-    font-size: 15px;
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
 
-    background: linear-gradient(145deg, #7b68ee, #5a4fcf);
-    border-radius: 12px;
-
-    /* 3D depth */
-    box-shadow:
-        0 6px 0 #4b3fb5,
-        0 10px 20px rgba(0,0,0,0.5);
-
-    transition: all 0.15s ease;
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* CENTER FIX */
-.btn-3d-wrapper {
-    text-align: center;
+@media (max-width: 480px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
 }
-
-
 </style>
 </head>
 
@@ -291,7 +321,7 @@ footer a:hover {
         <img src="logo.jpg" alt="ASTRYX Logo">
     </div>
 
-     <ul>
+    <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
 
@@ -338,37 +368,48 @@ footer a:hover {
 
     <section>
         <h2>Meet the Team</h2>
-        <ul>
-            <li>
-                <img src="71.png">
-                <h3>Hacker - Joegie Salutin</h3>
-                <p>Joegie is the team’s tech wizard. Hacking and coding can be really tough, full of tricky problems and stubborn bugs, but he never gives up. He spends hours figuring out solutions, learning new tricks, and making sure everything works. Even when it’s difficult, Joegie tries his absolute best, and somehow, by the end, he always makes it happen.</p>
-            </li>
 
-            <li>
-                <img src="3.jpg">
-                <h3>Hipster - Lynbel Grace Peñora</h3>
-                <p>Lynbel is our creative director, bringing a fresh perspective to our team building activities. She's a design enthusiast with a love for storytelling and visual arts.</p>
-            </li>
+        <div class="team-grid">
 
-            <li>
-                <img src="1.jpg">
-                <h3>Hustler - Kenneth Palmes</h3>
-                <p>kenneth is our marketing guru, responsible for spreading the word about our team building activities. He's a sales expert with a passion for networking and building relationships.</p>
-            </li>
+            <div class="team-card">
+                <img src="71.png" alt="Joegie Salutin">
+                <div class="team-card-body">
+                    <h3>Hacker — Joegie Salutin</h3>
+                    <p>Joegie is the team's tech wizard. Hacking and coding can be really tough, full of tricky problems and stubborn bugs, but he never gives up. He spends hours figuring out solutions, learning new tricks, and making sure everything works. Even when it's difficult, Joegie tries his absolute best, and somehow, by the end, he always makes it happen.</p>
+                </div>
+            </div>
 
-            <li>
-                <img src="2.jpg">
-                <h3>Handler - Charmae Quibingco</h3>
-                <p>The boss behind the scenes. Charmae keeps everyone organized and makes sure deadlines are not just "suggestions." Calm, focused, and always in control. If the team is chaos, she is the order. Basically, the real MVP</p>
-            </li>
-        </ul>
+            <div class="team-card">
+                <img src="3.jpg" alt="Lynbel Grace Peñora">
+                <div class="team-card-body">
+                    <h3>Hipster — Lynbel Grace Peñora</h3>
+                    <p>Lynbel is our creative director, bringing a fresh perspective to our team building activities. She's a design enthusiast with a love for storytelling and visual arts.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="1.jpg" alt="Kenneth Palmes">
+                <div class="team-card-body">
+                    <h3>Hustler — Kenneth Palmes</h3>
+                    <p>Kenneth is our marketing guru, responsible for spreading the word about our team building activities. He's a sales expert with a passion for networking and building relationships.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="2.jpg" alt="Charmae Quibingco">
+                <div class="team-card-body">
+                    <h3>Handler — Charmae Quibingco</h3>
+                    <p>The boss behind the scenes. Charmae keeps everyone organized and makes sure deadlines are not just "suggestions." Calm, focused, and always in control. If the team is chaos, she is the order. Basically, the real MVP.</p>
+                </div>
+            </div>
+
+        </div>
     </section>
 
-    <section>
-         <h2>Story Behind Our Logo</h2>
-        <img src="logo.jpg" style="width:200px; display:block; margin:20px auto;">
-        <p>The ASTRYX logo represents our vision of limitless potential and innovation. Inspired by the word “astral” and the concept of stars, the logo symbolizes ambition, creativity, and connection. The glowing lines and nodes in the design reflect how our ideas and teamwork are interconnected, showing that every member plays a crucial role in reaching higher goals. Just like stars in the sky, ASTRYX aims to shine brightly and inspire others to reach beyond limits.</p>
+    <section class="logo-story">
+        <h2>Story Behind Our Logo</h2>
+        <img src="logo.jpg" alt="ASTRYX Logo">
+        <p>The ASTRYX logo represents our vision of limitless potential and innovation. Inspired by the word "astral" and the concept of stars, the logo symbolizes ambition, creativity, and connection. The glowing lines and nodes in the design reflect how our ideas and teamwork are interconnected, showing that every member plays a crucial role in reaching higher goals. Just like stars in the sky, ASTRYX aims to shine brightly and inspire others to reach beyond limits.</p>
     </section>
 
 </main>
@@ -385,16 +426,14 @@ footer a:hover {
 </footer>
 
 <script>
-
 const dropdown = document.querySelector(".dropdown");
 const trigger = dropdown.querySelector("a");
 
 trigger.addEventListener("click", function (e) {
-    e.preventDefault(); // stop link jump
-    dropdown.classList.toggle("active"); // open/close toggle
+    e.preventDefault();
+    dropdown.classList.toggle("active");
 });
 
-// optional: click outside to close
 document.addEventListener("click", function (e) {
     if (!dropdown.contains(e.target)) {
         dropdown.classList.remove("active");
@@ -436,14 +475,14 @@ window.onload = () => {
 
     function draw() {
         ctx.fillStyle = "rgba(0,0,0,0.08)";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = "#7b68ee";
         ctx.font = fontSize + "px monospace";
 
-        drops.forEach((y,i)=>{
-            const text = letters[Math.floor(Math.random()*letters.length)];
-            ctx.fillText(text, i*fontSize, y);
+        drops.forEach((y, i) => {
+            const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillText(text, i * fontSize, y);
             drops[i] = y > canvas.height ? 0 : y + fontSize;
         });
     }
