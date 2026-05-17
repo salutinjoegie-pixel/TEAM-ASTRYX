@@ -76,7 +76,7 @@ nav {
 nav ul {
     display: flex;
     align-items: center;
-    gap: 30px; /* ✔ mas hipid nga spacing */
+    gap: 30px;
     list-style: none;
 }
 
@@ -114,7 +114,7 @@ nav ul li a:hover {
     overflow-y: auto;
     border: 1px solid violet;
     box-shadow: 0 0 20px rgba(138,43,226,0.5);
-    z-index: 9999;          /* ✔ ensure above everything */
+    z-index: 9999;
 }
 
 /* SHOW STATE */
@@ -127,10 +127,9 @@ nav ul li a:hover {
     list-style: none;
 }
 
-/* IMPORTANT: make full clickable */
 .submenu li a {
     display: block;
-    width: 100%;            /* ✔ full width clickable */
+    width: 100%;
     padding: 10px;
     border-radius: 6px;
     color: #ddd;
@@ -266,26 +265,21 @@ footer a:hover {
    3D BUTTON STYLE
 ========================= */
 .btn-3d {
-    display: inline-block;      /* IMPORTANT: fits content width */
+    display: inline-block;
     padding: 12px 24px;
     margin: 20px auto;
     font-size: 15px;
     color: #fff;
     text-decoration: none;
     text-align: center;
-
     background: linear-gradient(145deg, #7b68ee, #5a4fcf);
     border-radius: 12px;
-
-    /* 3D depth */
     box-shadow:
         0 6px 0 #4b3fb5,
         0 10px 20px rgba(0,0,0,0.5);
-
     transition: all 0.15s ease;
 }
 
-/* CENTER FIX */
 .btn-3d-wrapper {
     text-align: center;
 }
@@ -297,23 +291,17 @@ footer a:hover {
     position: absolute;
     top: 12px;
     right: 15px;
-
     width: 44px;
     height: 44px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     border-radius: 10px;
-
     background: linear-gradient(145deg, rgba(160,32,240,0.3), rgba(0,0,0,0.8));
     border: 1px solid #a020f0;
-
     box-shadow:
         0 10px 20px rgba(0,0,0,0.7),
         inset 0 0 12px rgba(160,32,240,0.4);
-
     cursor: pointer;
     transition: 0.25s ease;
 }
@@ -322,7 +310,6 @@ footer a:hover {
     font-size: 20px;
     font-weight: bold;
     color: #d28cff;
-
     text-shadow:
         0 1px 0 #6a0dad,
         0 2px 0 #4b0082,
@@ -338,6 +325,7 @@ iframe {
     flex: 1;
     border: none;
 }
+
 /* =========================
    📄 PDF BLOCKS (3D PURPLE)
 ========================= */
@@ -352,14 +340,11 @@ iframe {
 .pdf-card {
     padding: 25px;
     border-radius: 14px;
-
     background: linear-gradient(145deg, rgba(160,32,240,0.18), rgba(0,0,0,0.7));
     border: 1px solid #a020f0;
-
     box-shadow:
         0 15px 35px rgba(0,0,0,0.8),
         inset 0 0 15px rgba(160,32,240,0.25);
-
     cursor: pointer;
     transition: 0.4s;
 }
@@ -370,7 +355,6 @@ iframe {
                rotateX(10deg)
                translateY(-10px)
                scale(1.05);
-
     box-shadow: 0 30px 70px rgba(160,32,240,0.4);
 }
 
@@ -391,13 +375,10 @@ iframe {
     width: 92%;
     max-width: 980px;
     height: 800px;
-
     background: #120018;
     border: 2px solid #a020f0;
     border-radius: 18px;
-
     padding: 18px;
-
     box-shadow: 0 0 40px rgba(160,32,240,0.3);
 }
 
@@ -443,64 +424,12 @@ iframe {
 .modal-content {
     width: 95%;
     height: 95%;
-
     background: #120018;
     border: 1px solid #a020f0;
-
     border-radius: 12px;
     position: relative;
-
     display: flex;
     flex-direction: column;
-}
-
-/* =========================
-   ✖ 3D PURPLE CLOSE BUTTON
-========================= */
-.close-btn {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-
-    width: 44px;
-    height: 44px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 10px;
-
-    background: linear-gradient(145deg, rgba(160,32,240,0.3), rgba(0,0,0,0.8));
-    border: 1px solid #a020f0;
-
-    box-shadow:
-        0 10px 20px rgba(0,0,0,0.7),
-        inset 0 0 12px rgba(160,32,240,0.4);
-
-    cursor: pointer;
-    transition: 0.25s ease;
-}
-
-.x-3d {
-    font-size: 20px;
-    font-weight: bold;
-    color: #d28cff;
-
-    text-shadow:
-        0 1px 0 #6a0dad,
-        0 2px 0 #4b0082,
-        0 3px 8px rgba(0,0,0,0.8);
-}
-
-.close-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 15px 30px rgba(160,32,240,0.5);
-}
-
-iframe {
-    flex: 1;
-    border: none;
 }
 
 /* BUTTON */
@@ -511,7 +440,6 @@ button {
     color: #d28cff;
     cursor: pointer;
 }
-
 
 </style>
 </head>
@@ -566,16 +494,25 @@ button {
     <div class="pdf-card" onclick="openDoc('SDD.pdf')">
         <i class="fas fa-file-pdf"></i>
         <h3>SDD</h3>
-        <p>By: Joegie salutin</p>
+        <p>By: Joegie Salutin</p>
     </div>
 </div>
 
+    <!-- PDF -->
+<div class="doc-list">
+    <div class="pdf-card" onclick="openDoc('SPMP.pdf')">
+        <i class="fas fa-file-pdf"></i>
+        <h3>SPMP</h3>
+        <p>By: Lynbel Grace Penora</p>
+    </div>
+</div>
+    
 <!-- PDF -->
 <div class="doc-list">
     <div class="pdf-card" onclick="openDoc('STD.pdf')">
         <i class="fas fa-file-pdf"></i>
         <h3>STD</h3>
-         <p>By: charmai may quibingco</p>
+        <p>By: Charmai May Quibingco</p>
     </div>
 </div>
 
@@ -584,21 +521,9 @@ button {
     <div class="pdf-card" onclick="openDoc('SRS.pdf')">
         <i class="fas fa-file-pdf"></i>
         <h3>SRS</h3>
-         <p>By: kenneth palmes</p>
+        <p>By: Kenneth Palmes</p>
     </div>
 </div>
-
-
-<!-- PDF -->
-<div class="doc-list">
-    <div class="pdf-card" onclick="openDoc('SPMP.pdf')">
-        <i class="fas fa-file-pdf"></i>
-        <h3>SPMP</h3>
-         <p>By: lynbel grace penora</p>
-    </div>
-</div>
-
-
 
 
 <!-- MODAL (ONLY ONE!) -->
@@ -625,7 +550,7 @@ button {
     </div>
 </footer>
 
- <script>
+<script>
 
 const dropdown = document.querySelector(".dropdown");
 const trigger = dropdown.querySelector("a");
@@ -738,7 +663,6 @@ function closeDoc(){
     document.getElementById("docModal").style.display="none";
     document.getElementById("docFrame").src="";
 }
-
 
 </script>
 
