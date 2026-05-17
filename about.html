@@ -89,9 +89,7 @@ nav ul li a:hover {
     background: rgba(138,43,226,0.15);
 }
 
-.dropdown {
-    position: relative;
-}
+.dropdown { position: relative; }
 
 .submenu {
     display: none;
@@ -109,9 +107,7 @@ nav ul li a:hover {
     z-index: 9999;
 }
 
-.dropdown.active .submenu {
-    display: block;
-}
+.dropdown.active .submenu { display: block; }
 
 .submenu li a {
     display: block;
@@ -156,7 +152,7 @@ header h1 {
 
 @keyframes floatTitle {
     0%,100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50%      { transform: translateY(-10px); }
 }
 
 /* MAIN */
@@ -170,7 +166,7 @@ main {
 section {
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(12px);
-    padding: 25px;
+    padding: 35px;
     margin-bottom: 25px;
     border-radius: 15px;
     border: 1px solid rgba(123,104,238,0.2);
@@ -189,58 +185,129 @@ h2 {
     margin-bottom: 18px;
 }
 
-/* ===== TEAM CARDS GRID ===== */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 28px;
-    margin-top: 10px;
+/* =============================================
+   TEAM SECTION — 2x2 grid like reference image
+   Left col: photo LEFT, text RIGHT
+   Right col: photo RIGHT, text LEFT (mirrored)
+============================================= */
+
+.team-banner {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
+.team-banner h2 {
+    font-size: 2.2rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px #7b68ee, 0 0 40px #6a00ff;
+    margin-bottom: 6px;
+}
+
+.team-banner p {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* 2×2 grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+}
+
+/* Each card */
 .team-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(123,104,238,0.3);
-    border-radius: 18px;
-    overflow: hidden;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(123,104,238,0.25);
+    border-radius: 16px;
+    padding: 24px 20px;
     transition: transform 0.3s, box-shadow 0.3s;
-    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(123,104,238,0.06), transparent);
+    border-radius: 16px;
+    pointer-events: none;
 }
 
 .team-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 30px rgba(123,104,238,0.5);
+    transform: translateY(-6px);
+    box-shadow: 0 0 30px rgba(123,104,238,0.45);
 }
 
-/* BIGGER PHOTO */
+/* Right column cards: flip photo to the right */
+.team-card.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+/* Circular photo */
 .team-card img {
-    width: 100%;
-    height: 240px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     object-fit: cover;
     object-position: top;
-    border-bottom: 2px solid rgba(123,104,238,0.4);
+    border: 3px solid #7b68ee;
+    box-shadow: 0 0 20px rgba(123,104,238,0.55);
+    flex-shrink: 0;
     display: block;
 }
 
-.team-card-body {
-    padding: 18px 16px;
+/* Text block */
+.team-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.team-card h3 {
-    color: #b39ddb;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    line-height: 1.4;
+.team-role {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #9c7ff5;
+    margin-bottom: 4px;
 }
 
-.team-card p {
-    font-size: 0.85rem;
-    color: #ccc;
-    line-height: 1.6;
+.team-divider {
+    width: 36px;
+    height: 2px;
+    background: linear-gradient(90deg, #7b68ee, #9c27b0);
+    margin: 6px 0;
+    border-radius: 2px;
 }
 
-/* LOGO STORY SECTION */
-.logo-story img {
+.team-card.reverse .team-divider {
+    margin-left: auto;
+}
+
+.team-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    text-shadow: 0 0 8px rgba(123,104,238,0.35);
+}
+
+.team-desc {
+    font-size: 0.8rem;
+    color: #bbb;
+    line-height: 1.65;
+}
+
+/* LOGO STORY */
+.logo-story-img {
     width: 200px;
     display: block;
     margin: 20px auto;
@@ -260,9 +327,7 @@ footer a {
     font-size: 20px;
 }
 
-footer a:hover {
-    color: #7b68ee;
-}
+footer a:hover { color: #7b68ee; }
 
 /* 3D BUTTON */
 .btn-3d {
@@ -275,44 +340,34 @@ footer a:hover {
     text-align: center;
     background: linear-gradient(145deg, #7b68ee, #5a4fcf);
     border-radius: 12px;
-    box-shadow:
-        0 6px 0 #4b3fb5,
-        0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 6px 0 #4b3fb5, 0 10px 20px rgba(0,0,0,0.5);
     transition: all 0.15s ease;
 }
 
-.btn-3d-wrapper {
-    text-align: center;
-}
+.btn-3d-wrapper { text-align: center; }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 10px;
-    }
+    nav { flex-direction: column; gap: 10px; }
+    header h1 { font-size: 2rem; }
+    .hero img { height: 300px; }
 
-    header h1 {
-        font-size: 2rem;
-    }
-
-    .hero img {
-        height: 300px;
-    }
-
-    .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
     .team-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Reset reverse on mobile so all cards go photo-left */
+    .team-card.reverse {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .team-card.reverse .team-divider {
+        margin-left: 0;
     }
 }
 </style>
 </head>
-
 <body>
 
 <!-- NAV -->
@@ -366,49 +421,65 @@ footer a:hover {
         <p>Team Astryx began with a simple idea: to bring people together and unlock the power of teamwork. Our mission is to inspire collaboration, spark creativity, and help individuals grow while having fun. With four unique members, each bringing their own skills and perspectives, we strive to create meaningful experiences that challenge, engage, and motivate every team we work with. Together, we believe that any goal can be achieved when minds connect and ideas are shared.</p>
     </section>
 
+    <!-- TEAM SECTION -->
     <section>
-        <h2>Meet the Team</h2>
+        <div class="team-banner">
+            <h2>Meet the Team</h2>
+            <p>The minds behind Team Astryx</p>
+        </div>
 
         <div class="team-grid">
 
+            <!-- TOP LEFT: photo left, text right -->
             <div class="team-card">
                 <img src="71.png" alt="Joegie Salutin">
-                <div class="team-card-body">
-                    <h3>Hacker — Joegie Salutin</h3>
-                    <p>Joegie is the team's tech wizard. Hacking and coding can be really tough, full of tricky problems and stubborn bugs, but he never gives up. He spends hours figuring out solutions, learning new tricks, and making sure everything works. Even when it's difficult, Joegie tries his absolute best, and somehow, by the end, he always makes it happen.</p>
+                <div class="team-info">
+                    <span class="team-role">Hacker</span>
+                    <div class="team-divider"></div>
+                    <span class="team-name">Joegie Salutin</span>
+                    <p class="team-desc">Joegie is the team's tech wizard. Hacking and coding can be really tough, full of tricky problems and stubborn bugs, but he never gives up. He always makes it happen.</p>
                 </div>
             </div>
 
-            <div class="team-card">
+            <!-- TOP RIGHT: photo right, text left -->
+            <div class="team-card reverse">
                 <img src="3.jpg" alt="Lynbel Grace Peñora">
-                <div class="team-card-body">
-                    <h3>Hipster — Lynbel Grace Peñora</h3>
-                    <p>Lynbel is our creative director, bringing a fresh perspective to our team building activities. She's a design enthusiast with a love for storytelling and visual arts.</p>
+                <div class="team-info">
+                    <span class="team-role">Hipster</span>
+                    <div class="team-divider"></div>
+                    <span class="team-name">Lynbel Grace Peñora</span>
+                    <p class="team-desc">Lynbel is our creative director, bringing a fresh perspective to our activities. She's a design enthusiast with a love for storytelling and visual arts.</p>
                 </div>
             </div>
 
+            <!-- BOTTOM LEFT: photo left, text right -->
             <div class="team-card">
                 <img src="1.jpg" alt="Kenneth Palmes">
-                <div class="team-card-body">
-                    <h3>Hustler — Kenneth Palmes</h3>
-                    <p>Kenneth is our marketing guru, responsible for spreading the word about our team building activities. He's a sales expert with a passion for networking and building relationships.</p>
+                <div class="team-info">
+                    <span class="team-role">Hustler</span>
+                    <div class="team-divider"></div>
+                    <span class="team-name">Kenneth Palmes</span>
+                    <p class="team-desc">Kenneth is our marketing guru, responsible for spreading the word about our activities. A sales expert with a passion for networking and building relationships.</p>
                 </div>
             </div>
 
-            <div class="team-card">
+            <!-- BOTTOM RIGHT: photo right, text left -->
+            <div class="team-card reverse">
                 <img src="2.jpg" alt="Charmae Quibingco">
-                <div class="team-card-body">
-                    <h3>Handler — Charmae Quibingco</h3>
-                    <p>The boss behind the scenes. Charmae keeps everyone organized and makes sure deadlines are not just "suggestions." Calm, focused, and always in control. If the team is chaos, she is the order. Basically, the real MVP.</p>
+                <div class="team-info">
+                    <span class="team-role">Handler</span>
+                    <div class="team-divider"></div>
+                    <span class="team-name">Charmae Quibingco</span>
+                    <p class="team-desc">The boss behind the scenes. Charmae keeps everyone organized and makes sure deadlines are not just "suggestions." Calm, focused — basically the real MVP.</p>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <section class="logo-story">
+    <section>
         <h2>Story Behind Our Logo</h2>
-        <img src="logo.jpg" alt="ASTRYX Logo">
+        <img class="logo-story-img" src="logo.jpg" alt="ASTRYX Logo">
         <p>The ASTRYX logo represents our vision of limitless potential and innovation. Inspired by the word "astral" and the concept of stars, the logo symbolizes ambition, creativity, and connection. The glowing lines and nodes in the design reflect how our ideas and teamwork are interconnected, showing that every member plays a crucial role in reaching higher goals. Just like stars in the sky, ASTRYX aims to shine brightly and inspire others to reach beyond limits.</p>
     </section>
 
@@ -417,7 +488,6 @@ footer a:hover {
 <!-- FOOTER -->
 <footer>
     <p>© 2026 ASTRYX Team</p>
-
     <div>
         <a href="mailto:yourgmail@gmail.com"><i class="fas fa-envelope"></i></a>
         <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
@@ -459,7 +529,6 @@ window.onload = () => {
     const canvas = document.createElement("canvas");
     canvas.classList.add("matrixCanvas");
     document.body.prepend(canvas);
-
     const ctx = canvas.getContext("2d");
 
     function resize() {
@@ -476,10 +545,8 @@ window.onload = () => {
     function draw() {
         ctx.fillStyle = "rgba(0,0,0,0.08)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
         ctx.fillStyle = "#7b68ee";
         ctx.font = fontSize + "px monospace";
-
         drops.forEach((y, i) => {
             const text = letters[Math.floor(Math.random() * letters.length)];
             ctx.fillText(text, i * fontSize, y);
